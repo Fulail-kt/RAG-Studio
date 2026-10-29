@@ -1,0 +1,62 @@
+# ── Python ──────────────────────────────────────────────
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── Environment / Secrets ────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Data / Databases ─────────────────────────────────────
+data/
+vector_db/
+chroma_db/
+*.sqlite
+*.sqlite3
+*.db
+
+# ── Frontend ─────────────────────────────────────────────
+web/node_modules/
+web/dist/
+web/dist-ssr/
+web/.nitro/
+web/.tanstack/
+web/.vinxi/
+web/.output/
+web/.wrangler/
+web/__unconfig*
+web/.DS_Store
+
+# ── OS ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ───────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Test / scratch ───────────────────────────────────────
+test/
+scripts/
+
+# ── Logs ─────────────────────────────────────────────────
+*.log
+logs/
