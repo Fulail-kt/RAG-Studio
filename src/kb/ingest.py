@@ -2,8 +2,8 @@ from datetime import datetime, timezone
 
 from src.config import SCRAPE_MAX_AGE_DAYS
 from src.kb.fetch import fetch_public_page
-from src.kb.pages import list_pages, replace_page, stored_page_text
-from src.kb.scrape_log import get_scrape, is_fresh, list_scrapes, upsert_scrape
+from src.kb.pages import delete_page, list_pages, replace_page, stored_page_text
+from src.kb.scrape_log import delete_scrape, get_scrape, is_fresh, list_scrapes, upsert_scrape
 
 
 def _now():
@@ -45,6 +45,12 @@ def add_kb(user_id: str, topic: str, url: str = "", text: str = ""):
         replace_page(user_id, topic, source, text, scraped_at)
         return {"topic": topic, "source": source, "chars": len(text)}
     raise ValueError("url or text is required")
+
+
+def delete_kb(user_id: str, source: str):
+    delete_page(user_id, source)
+    if source.startswith("http"):
+        delete_scrape(user_id, source)
 
 
 def sync_prompt_page(user_id: str, topic: str, url: str) -> str:

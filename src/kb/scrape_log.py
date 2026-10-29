@@ -58,6 +58,14 @@ def upsert_scrape(user_id: str, topic: str, url: str, scraped_at: str):
         )
 
 
+def delete_scrape(user_id: str, url: str):
+    with _connect() as conn:
+        conn.execute(
+            "DELETE FROM scrape_log WHERE user_id = ? AND url = ?",
+            (user_id, url),
+        )
+
+
 def is_fresh(scraped_at: str, max_age_days: int) -> bool:
     stamp = datetime.fromisoformat(scraped_at)
     if stamp.tzinfo is None:

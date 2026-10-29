@@ -918,6 +918,25 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 }
 .kb-chunks-toggle:hover { filter: brightness(1.1); }
 
+.kb-delete-btn {
+  flex-shrink: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  margin-left: auto;
+}
+.kb-delete-btn svg { width: 0.88rem; height: 0.88rem; }
+.kb-delete-btn:hover { background: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+.kb-delete-btn:disabled { opacity: 0.4; pointer-events: none; }
+
 .kb-chunks-list { padding-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem; }
 
 .chunk {

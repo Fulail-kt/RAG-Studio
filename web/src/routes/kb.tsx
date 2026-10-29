@@ -32,6 +32,7 @@ function KnowledgePage() {
   const [text, setText] = useState('')
   const [error, setError] = useState('')
   const [pending, setPending] = useState(false)
+  const [deleting, setDeleting] = useState<string | null>(null)
 
   async function load() {
     const data = await api<{ items: KbItem[] }>('/kb')
@@ -62,6 +63,20 @@ function KnowledgePage() {
       setError(err instanceof Error ? err.message : 'Save failed')
     } finally {
       setPending(false)
+    }
+  }
+
+  async function onDelete(source: string) {
+    if (!confirm(`Delete "${source}"?\n\nThis removes it from the knowledge base permanently.`)) return
+    setDeleting(source)
+    setError('')
+    try {
+      await api(`/kb?source=${encodeURIComponent(source)}`, { method: 'DELETE' })
+      await load()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Delete failed')
+    } finally {
+      setDeleting(null)
     }
   }
 
@@ -198,6 +213,23 @@ function KnowledgePage() {
                   </p>
                 </div>
                 <span className="pill pill--ok">{item.chunks}</span>
+                <button
+                  type="button"
+                  className="kb-delete-btn"
+                  disabled={deleting === item.source}
+                  onClick={() => onDelete(item.source)}
+                  title="Delete"
+                >
+                  {deleting === item.source ? (
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" style={{ animation: 'spin 1s linear infinite' }}>
+                      <path d="M8 2a6 6 0 1 0 6 6" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+                      <path d="M3 4h10M6 4V3h4v1M5 4l.5 8h5L11 4" />
+                    </svg>
+                  )}
+                </button>
               </div>
               {(item.texts ?? []).length > 0 && (
                 <div className="kb-item-chunks">

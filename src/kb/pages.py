@@ -71,6 +71,14 @@ def list_pages(user_id: str):
     return list(grouped.values())
 
 
+def delete_page(user_id: str, url: str):
+    store = get_user_vectorstore()
+    try:
+        store.delete(where=_page_filter(user_id, url))
+    except Exception:
+        pass
+
+
 def search_user(user_id: str, question: str, k: int = 4):
     store = get_user_vectorstore()
     return store.similarity_search(

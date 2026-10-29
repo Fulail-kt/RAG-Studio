@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
+
 from pydantic import BaseModel, Field
 
 from src.auth.deps import current_user
-from src.kb.ingest import add_kb, list_kb
+from src.kb.ingest import add_kb, delete_kb, list_kb
 
 router = APIRouter()
 
@@ -25,3 +26,12 @@ def create_kb(body: KbBody, user=Depends(current_user)):
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc))
     return {"user_id": user["user_id"], **saved}
+
+
+@router.delete("/kb")
+def remove_kb(source: str = Query(..., min_length=1), user=Depends(current_user)):
+    try:
+        delete_kb(user["user_id"], source)
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    return {"deleted": source}
