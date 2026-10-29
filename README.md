@@ -199,7 +199,7 @@ On the **Agent** edit page, the right panel is a live chat widget. Save the agen
 | Variable | Required | Default | Description |
 |---|---|---|---|
 | `GEMINI_API_KEY` | Yes | — | Google Gemini API key |
-| `GEMINI_MODEL_NAME` | No | `gemini-2.0-flash` | Main chat model |
+| `GEMINI_MODEL_NAME` | No | `gemini-3.6-flash` | Main chat model |
 | `DECISION_MODEL_NAME` | No | same as `GEMINI_MODEL_NAME` | Routing/decision model (lighter = faster) |
 | `SMALL_MODEL_NAME` | No | same as `GEMINI_MODEL_NAME` | Lightweight task model |
 | `SCRAPE_MAX_AGE_DAYS` | No | `7` | Days before a cached URL is re-scraped |
