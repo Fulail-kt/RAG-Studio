@@ -98,9 +98,9 @@ Edit `.env` and fill in your values:
 
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
-GEMINI_MODEL_NAME=gemini-2.0-flash
-DECISION_MODEL_NAME=gemini-2.0-flash-lite
-SMALL_MODEL_NAME=gemini-2.0-flash-lite
+GEMINI_MODEL_NAME=gemini-3.6-flash
+DECISION_MODEL_NAME=gemini-3.1-flash-lite
+SMALL_MODEL_NAME=gemini-3.5-flash-lite
 SCRAPE_MAX_AGE_DAYS=7
 ```
 
